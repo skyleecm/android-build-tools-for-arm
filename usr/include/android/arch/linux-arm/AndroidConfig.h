@@ -16,8 +16,6 @@
 
 /*
  * Android config -- "android-arm".  Used for ARM device builds.
- * cm: use as arm host build
- * cm: copy this to target_android-arm
  */
 #ifndef _ANDROID_CONFIG_H
 #define _ANDROID_CONFIG_H
@@ -59,9 +57,8 @@
 /*
  * Define if we already have the futex wrapper functions defined. Yes if
  * compiling against bionic.
- *
- * define HAVE_FUTEX_WRAPPERS 1
  */
+//#define HAVE_FUTEX_WRAPPERS 1
 
 /*
  * Process creation model.  Choose one:
@@ -85,10 +82,8 @@
  * HAVE_MACOSX_IPC - use Macintosh IPC mechanisms (sem_open, mmap).
  * HAVE_WIN32_IPC - use Win32 IPC (CreateSemaphore, CreateFileMapping).
  * HAVE_ANDROID_IPC - use Android versions (?, mmap).
- *
- * define HAVE_ANDROID_IPC
- *
  */
+//#define HAVE_ANDROID_IPC
 #define HAVE_SYSV_IPC
 
 /*
@@ -148,10 +143,14 @@
 
 /*
  * Define this if have clock_gettime() and friends
- *
- * define HAVE_POSIX_CLOCKS
- *
  */
+#define HAVE_POSIX_CLOCKS
+
+/*
+ * Define this if we have pthread_cond_timedwait_monotonic() and
+ * clock_gettime(CLOCK_MONOTONIC).
+ */
+#define HAVE_TIMEDWAIT_MONOTONIC
 
 /*
  * Define this if we have linux style epoll()
@@ -185,11 +184,16 @@
  * Defined if we have the backtrace() call for retrieving a stack trace.
  * Needed for CallStack to operate; if not defined, CallStack is
  * non-functional.
- *
- * define HAVE_BACKTRACE 0
- *
  */
+//#define HAVE_BACKTRACE 0
 #define HAVE_BACKTRACE 1
+
+/*
+ * Defined if we have the dladdr() call for retrieving the symbol associated
+ * with a memory address.  If not defined, stack crawls will not have symbolic
+ * information.
+ */
+#define HAVE_DLADDR 1
 
 /*
  * Defined if we have the cxxabi.h header for demangling C++ symbols.  If
@@ -199,10 +203,8 @@
 
 /*
  * Defined if we have the gettid() system call.
- *
- * define HAVE_GETTID
- *
  */
+//#define HAVE_GETTID
 
 /* 
  * Defined if we have the sched_setscheduler() call
@@ -223,10 +225,8 @@
 
 /* 
  * Define if we're running on *our* linux on device or emulator.
- *
- * define HAVE_ANDROID_OS 1
- *
  */
+//#define HAVE_ANDROID_OS 1
 
 /*
  * Define if we have Linux-style non-filesystem Unix Domain Sockets
@@ -255,10 +255,8 @@
 
 /*
  * Define if libc includes Android system properties implementation.
- *
- * define HAVE_LIBC_SYSTEM_PROPERTIES 1
- *
  */
+//#define HAVE_LIBC_SYSTEM_PROPERTIES 1
 
 /*
  * Define if system provides a system property server (should be
@@ -314,10 +312,8 @@
 
 /*
  * Define if the strlcpy() function exists on the system.
- *
- * define HAVE_STRLCPY 1
- *
  */
+//#define HAVE_STRLCPY 1
 
 /*
  * Define if the open_memstream() function exists on the system.
@@ -327,10 +323,8 @@
 
 /*
  * Define if the BSD funopen() function exists on the system.
- *
- * define HAVE_FUNOPEN 1
- *
  */
+//#define HAVE_FUNOPEN 1
 
 /*
  * Define if prctl() exists
@@ -379,10 +373,8 @@
 
 /*
  * Define to 1 if <stdlib.h> provides qsort_r() with a GNU style function prototype.
- *
- * define HAVE_GNU_QSORT_R 0
- *
  */
+//#define HAVE_GNU_QSORT_R 0
 #define HAVE_GNU_QSORT_R 1
 
 #endif /* _ANDROID_CONFIG_H */
